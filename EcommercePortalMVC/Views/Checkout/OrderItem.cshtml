@@ -1,0 +1,72 @@
+﻿@model EcommercePortalMVC.Models.Order
+@{
+    ViewData["Title"] = "OrderItem";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <img src="https://cdn2.iconfinder.com/data/icons/basic-ui-color/37/Tick-512.png" class="img-fluid" width="200px" />
+            <br />
+        </div>
+        <div class="col">
+            <h2>Thank you for your Order</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h2>Order:@Model.Id</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Model.Product.Name</td>
+                        <td>1</td>
+                        <td>&#8377; @Model.Product.Price</td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <th>Shipping Charges</th>
+                        <td></td>
+                        <td>&#8377; @Model.Vendor.DeliveryCharges</td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <th>Total Amount</th>
+                        <td></td>
+                        <td>@{var total = Model.Vendor.DeliveryCharges + @Model.Product.Price;} &#8377; @total</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h2>Address</h2>
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h3>We Need your Feedback</h3>
+            @for (int i = 0; i < 5; i++)
+            {
+                <a asp-action="AddRating" style="text-decoration:none;color:grey" asp-route-id="@Model.UserId" asp-controller="Checkout" asp-route-pid="@Model.ProductId" asp-route-rating="@i"><i class="material-icons md-5" >star</i></a>
+            }
+
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <a asp-action="GetProducts" asp-controller="Products" asp-route-id="@Model.UserId">Back to Shopping</a>
+        </div>
+    </div>
+</div>
+

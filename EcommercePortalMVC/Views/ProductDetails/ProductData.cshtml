@@ -1,0 +1,53 @@
+﻿@model EcommercePortalMVC.Models.ProductViewModel
+@{
+    ViewData["Title"] = "Product";
+    Order order = new Order();
+    
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <img src="@Model.Product.Image_Name" class="img-fluid"/>
+        </div>
+        <div class="col-lg-6">
+            <h2>@Model.Product.Name</h2>
+            @for (int i = 0; i < (int)Model.Product.Rating; i++)
+            {
+                <i class="material-icons md-15" style="color: orange;">star</i>
+            }
+            @for (int i = (int)Model.Product.Rating; i < 5; i++)
+            {
+                <i class="material-icons md-15">star_outline</i>
+            }
+            <p>&#8377; @Model.Product.Price</p>
+            <h4>@Model.Product.Description</h4>
+            @if (TempData["wish"].ToString() == "0")
+            {
+                <p class="float-left">Selling by @Model.Vendor.VendorName</p>
+
+                @for (int i = 0; i < (int)Model.Vendor.Rating; i++)
+                {
+                    <i class="material-icons md-5" style="color: orange;">star</i>
+                }
+                @for (int i = (int)Model.Vendor.Rating; i < 5; i++)
+                {
+                    <i class="material-icons md-5">star_outline</i>
+                }
+
+
+
+
+                <p>Total Amount @{var total = (Model.Product.Price + Model.Vendor.DeliveryCharges);}<p>@total</p><span class="text-secondary">(@Model.Product.Price + Delivery Charges @Model.Vendor.DeliveryCharges)</span></p>
+                <a class="btn btn-primary" href="@Url.Action("OrderItem","Checkout",new{orderId=0,VendorId = Model.Vendor.Id, ProductId = Model.Product.Id, UserId = (int)TempData["user"] })"> Buy Now</a>
+
+            }
+            else
+            {
+                <h3 class="text-danger">Product is Out of Stock</h3>
+                <a class="btn btn-primary" asp-action="UserWishlist" asp-controller="Cart" asp-route-userId="@ViewContext.RouteData.Values["uid"]" asp-route-productId="@Model.Product.Id">Add to Wishlist</a>
+            }
+        </div>
+    </div>
+</div>
+

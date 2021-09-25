@@ -1,0 +1,33 @@
+﻿@model IEnumerable<EcommercePortalMVC.Models.Wishlist>
+@{
+    ViewData["Title"] = "UserCart";
+}
+
+@if (Model.Count() == 0)
+{
+<div class="container">
+    <p class="text-secondary">No Items in Wishlist</p>
+</div>
+    
+}
+else
+{
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="list-group">
+                @foreach (var item in Model)
+                {
+                    <div class="list-group-item">
+                        <img src="@item.Product.Image_Name" class="img-fluid float-right" style="width:100px" />
+                        <h3>@item.Product.Name</h3>
+                        <h4>@item.Product.Price</h4>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+}

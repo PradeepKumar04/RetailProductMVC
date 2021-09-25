@@ -1,0 +1,51 @@
+﻿@model IEnumerable<EcommercePortalMVC.Models.Product>
+@{
+    ViewData["Title"] = "GetProducts";
+}
+
+<div class="container">
+    <form asp-action="">
+        <input type="text" class="form-control w-50 float-left" name="item" placeholder="Enter Product Id or Product Name" />
+        <button asp-action="SearchProduct" asp-controller="Products" asp-route-id="item" type="submit" class="btn btn-primary"><i class="material-icons md-18">search</i></button>
+    </form>
+    @if(Model==null || Model.FirstOrDefault()==null)
+    {
+        <img src="https://www.dripline.co.ke/img/noresult.png" />
+    }
+    else
+    {
+    <div class="row">
+        <div class="col-xl-3">
+            @foreach (var item in Model)
+            {
+                @*
+            <button type="submit" asp-action="Product" asp-controller="ProductDetails" asp-route-uid="@ViewContext.RouteData.Values["id"]" asp-route-pid="@item.Id"></button>
+                *@
+                
+                <a  asp-action="ProductData" asp-controller="ProductDetails" asp-route-uid="@ViewContext.RouteData.Values["id"]" asp-route-pid="@item.Id"  style="text-decoration:none;color:black">
+                    <div class="card float-left m-1" style="width: 18rem;">
+                        <img class="card-img-top" src="@item.Image_Name" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Name</h5>
+                            <p class="card-text">@item.Description</p>
+                            @for (int i = 0; i < (int)item.Rating; i++)
+                            {
+                                <i class="material-icons md-18" style="color: orange;">star</i>
+                            }
+                            @for (int i = (int)item.Rating; i < 5; i++)
+                            {
+                                <i class="material-icons md-18">star_outline</i>
+                            }
+                            <p>&#8377; @item.Price</p>
+                            <a asp-controller="Cart" asp-action="UserCart" asp-route-userId="@ViewContext.RouteData.Values["id"]" asp-route-productId="@item.Id" class="btn btn-primary">Add To Cart</a>
+                        </div>
+                    </div>
+                </a>
+
+            }
+        </div>
+    </div>
+    }
+    
+</div>
+
