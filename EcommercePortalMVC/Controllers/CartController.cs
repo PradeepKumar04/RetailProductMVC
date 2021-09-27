@@ -15,8 +15,8 @@ namespace EcommercePortalMVC.Controllers
        public static List<Cart> carts = new List<Cart>();
        public static List<Wishlist> wishlists = new List<Wishlist>();
 
-        [Route("UserCart")]
-        public IActionResult UserCart()
+        [Route("Cart")]
+        public IActionResult Cart()
         {
             return View(carts);
         }
@@ -40,11 +40,11 @@ namespace EcommercePortalMVC.Controllers
             Product p1= p.GetProducts().Where(s=>s.Id==productId).FirstOrDefault();
             Cart c = new Cart() { ProductId = productId, Id = userId, ExpectedDelivery = DateTime.Now.AddDays(5), Product = p1, Vendor = vendors };
             carts.Add(c);
-            return RedirectToAction("UserCart");
+            return RedirectToAction("Cart");
         }
 
         [Route("UserWishlist")]
-        public IActionResult UserWishlist()
+        public IActionResult Wishlist()
         {
             return View(wishlists);
         }
@@ -57,17 +57,18 @@ namespace EcommercePortalMVC.Controllers
             wishlist.Id = (int)TempData["user"];
             wishlist.Product = p.GetProducts().Find(s => s.Id == productId);
             wishlists.Add(wishlist);
-            return View(wishlists);
+            return RedirectToAction("Wishlist");
+
         }
 
-            [Route("UserWishlist/{userId}/{productId}")]
+        [Route("UserWishlist/{userId}/{productId}")]
         public IActionResult UserWishlist(int userId,int productId)
         {
             Product p = new Product();
             Wishlist wishlist = new Wishlist() { Id=userId,ProductId=productId};
             wishlist.Product = p.GetProducts().Find(s=>s.Id==productId);
             wishlists.Add(wishlist);
-            return View(wishlists);
+            return RedirectToAction("Wishlist");
         }
 
     }

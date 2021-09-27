@@ -19,6 +19,13 @@ namespace EcommercePortalMVC.Controllers
             List<Product> products = p.GetProducts();
             return View(products);
         }
+        [Route("Test")]
+        public IActionResult Test()
+        {
+            return View();
+        }
+
+
 
         
 

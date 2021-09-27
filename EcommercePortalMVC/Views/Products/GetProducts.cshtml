@@ -8,44 +8,54 @@
         <input type="text" class="form-control w-50 float-left" name="item" placeholder="Enter Product Id or Product Name" />
         <button asp-action="SearchProduct" asp-controller="Products" asp-route-id="item" type="submit" class="btn btn-primary"><i class="material-icons md-18">search</i></button>
     </form>
-    @if(Model==null || Model.FirstOrDefault()==null)
+    @if (Model == null || Model.FirstOrDefault() == null)
     {
         <img src="https://www.dripline.co.ke/img/noresult.png" />
     }
     else
     {
-    <div class="row">
-        <div class="col-xl-3">
-            @foreach (var item in Model)
-            {
-                @*
-            <button type="submit" asp-action="Product" asp-controller="ProductDetails" asp-route-uid="@ViewContext.RouteData.Values["id"]" asp-route-pid="@item.Id"></button>
-                *@
-                
-                <a  asp-action="ProductData" asp-controller="ProductDetails" asp-route-uid="@ViewContext.RouteData.Values["id"]" asp-route-pid="@item.Id"  style="text-decoration:none;color:black">
-                    <div class="card float-left m-1" style="width: 18rem;">
-                        <img class="card-img-top" src="@item.Image_Name" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">@item.Name</h5>
-                            <p class="card-text">@item.Description</p>
+        <div class="row">
+            <div class="col">
+                @foreach (var item in Model)
+                {
+                    <a asp-action="ProductData" asp-controller="ProductDetails" asp-route-uid="@ViewContext.RouteData.Values["id"]" asp-route-pid="@item.Id" style="text-decoration:none;color:black">
+                    <div class="card float-left" style="width: 18rem;margin: 20px;">
+                        <div class="view overlay example example-cover">
+                            <img src="@item.Image_Name"
+                                 alt="Sample">
+                        </div>
+                        <div class="card-body text-center mt-0">
+
+                            <h5>@item.Name</h5>
+                            <p class="small text-muted text-uppercase mb-2">@item.Description</p>
                             @for (int i = 0; i < (int)item.Rating; i++)
                             {
-                                <i class="material-icons md-18" style="color: orange;">star</i>
+                                <span class="fa fa-star checked" style="color: orange;"></span>
+
                             }
                             @for (int i = (int)item.Rating; i < 5; i++)
                             {
-                                <i class="material-icons md-18">star_outline</i>
+                                <span class="fa fa-star"></span>
+
                             }
-                            <p>&#8377; @item.Price</p>
-                            <a asp-controller="Cart" asp-action="UserCart" asp-route-userId="@ViewContext.RouteData.Values["id"]" asp-route-productId="@item.Id" class="btn btn-primary">Add To Cart</a>
+                            <h6 class="mb-2">
+                                <span class="text-danger mr-1">&#8377; @item.Price</span>
+                            </h6>
+                            <a asp-controller="Cart" asp-action="UserCart" asp-route-userId="@ViewContext.RouteData.Values["id"]" asp-route-productId="@item.Id" class="btn btn-primary btn-sm mr-5" style="cursor:pointer"><i class="material-icons md-18" style="vertical-align: middle;">shopping_cart</i>Add to Cart</a>
+                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist">
+                                <i class="material-icons md-18" style="vertical-align: middle;float:right">favorite_border</i>
+                            </button>
                         </div>
+
                     </div>
+
                 </a>
 
-            }
+                }
+            </div>
         </div>
-    </div>
     }
-    
+
 </div>
+
 
