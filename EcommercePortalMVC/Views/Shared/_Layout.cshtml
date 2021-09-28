@@ -12,7 +12,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-dark navbar-expand-sm navbar-toggleable-sm  bg-dark border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="margin-right:auto;">EcommercePortalMVC</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -20,15 +20,21 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1" style="justify-content:flex-end">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><i class="material-icons d-md-inline">home</i></a>
-                        </li> 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Cart"><span><i class="material-icons d-md-inline">shopping_cart</i></span></a>
+                    <ul class="navbar-nav flex-grow-1 justify-content-center">
+                        <li class="nav-item mr-5 ml-5">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i>&nbsp; Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="UserWishlist"><i class="material-icons d-md-inline">favorite</i></a>
+                        <li class="nav-item mr-5">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Cart" asp-action="Cart"><span><i class="fa fa-shopping-cart"></i></span>&nbsp; Cart</a>
+                        </li>
+                        <li class="nav-item mr-5">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Cart" asp-action="UserWishlist"><i class="fa fa-heart"></i>&nbsp; Wishlist</a>
+                        </li>
+                        <li class="nav-item ml-auto">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-sign-out"></i>&nbsp; Logout</a>
+                        </li>
+                        <li class="nav-item mr-1 ml-5">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-user-circle"></i>&nbsp; Login</a>
                         </li>
                     </ul>
                 </div>

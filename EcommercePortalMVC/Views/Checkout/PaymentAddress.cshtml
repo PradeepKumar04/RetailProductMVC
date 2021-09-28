@@ -1,0 +1,148 @@
+﻿@model EcommercePortalMVC.Models.Order
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<!--Section: Block Content-->
+<section>
+    <form>
+    <!--Grid row-->
+    <div class="row">
+
+        <!--Grid column-->
+        <div class="col-lg-7 mb-4 mr-0">
+
+            <!-- Card -->
+            <div class="card wish-list p-5 w-75">
+                <div class="card-body">
+
+                    <h5 class="mb-2">Billing details</h5>
+                    <hr>
+
+                    <!-- Grid row -->
+                    </div>
+                    <!-- Address Part 1 -->
+                <div class="md-form md-outline mt-0">
+                    <label for="form14">Door No/Flat No</label>
+                    <span class="text-danger">*</span>
+
+                    <input type="text" id="form14" placeholder="House number and street name" class="form-control" required>
+                </div>
+
+                    <!-- Address Part 2 -->
+                <div class="md-form md-outline">
+                    <label for="form15">Area/Landmark</label>
+                    <span class="text-danger">*</span>
+
+
+                    <input type="text" id="form15" placeholder="Apartment, suite, unit etc. (optional)"
+                           class="form-control" required>
+                </div>
+
+                    <!-- Postcode / ZIP -->
+                    <div class="row ml-1">
+                        <div class="md-form md-outline">
+                            <label for="form16">Postcode / ZIP</label>
+                            <span class="text-danger">*</span>
+
+
+                            <input type="text" id="form16" class="form-control w-50" maxlength="6" min="50000" required>
+                        </div>
+
+                        <!-- Town / City -->
+                        <div class="md-form md-outline">
+                            <label for="form17">Town / City</label>
+                            <span class="text-danger">*</span>
+
+
+                            <input type="text" id="form17" class="form-control" required>
+                        </div>
+                    </div>
+
+
+                    <!-- Additional information -->
+            </div>
+            <!-- Card -->
+
+        </div>
+        <!--Grid column-->
+        <!--Grid column-->
+        <div class="col-lg-5">
+            <!-- Card -->
+            <div class="card mb-4 p-3">
+                <div class="card-body">
+                    <div class="float-right">
+                        <img class="mr-2" width="45"
+                             src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+                             alt="Visa">
+                        <img class="mr-2" width="45"
+                             src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+                             alt="American Express">
+                        <img class="mr-2" width="45"
+                             src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+                             alt="Mastercard">
+                    </div>
+                    <h5 class="mb-3">Payment</h5><hr>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Debit Card
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Credit Card
+                        </label>
+                    </div><hr>
+                    <div class="md-form md-outline mt-0">
+                        <label for="form14">Name on Card</label>
+                        <span class="text-danger">*</span>
+
+
+                        <input type="text" id="form14" class="form-control" required>
+                    </div>
+
+                    <!-- Address Part 2 -->
+                    <div class="md-form md-outline">
+                        <label for="form15">Card Number</label>
+                        <span class="text-danger">*</span>
+
+
+                        <input type="text" id="form15" class="form-control" required>
+                    </div>
+
+                    <!-- Postcode / ZIP -->
+                    <div class="row">
+                        <div class="col md-form md-outline float-left">
+                            <label for="form16">Expiration</label>
+                            <span class="text-danger">*</span>
+
+                            <input type="text" id="form16" class="form-control" placeholder="MM/YY" required>
+                        </div>
+
+                        <!-- Town / City -->
+                        <div class="col md-form md-outline">
+                            <label for="form17">CVV</label>
+                            <span class="text-danger">*</span>
+                            <input type="password" id="form17" class="form-control" maxlength="3" max="999" min="001" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-info btn-block waves-effect waves-light mt-4">Make purchase</button>
+
+                </div>
+            </div>
+            <!-- Card -->
+            <!-- Card -->
+            <!-- Card -->
+
+        </div>
+        <!--Grid column-->
+
+    </div>
+    <!--Grid row-->
+    </form>
+</section>
+<!--Section: Block Content-->

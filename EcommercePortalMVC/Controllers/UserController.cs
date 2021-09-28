@@ -42,7 +42,7 @@ namespace EcommercePortalMVC.Controllers
             }
             else
             {
-                return RedirectToAction("GetProducts", "Products");
+                return RedirectToAction("Login","User");
             }
         }
 

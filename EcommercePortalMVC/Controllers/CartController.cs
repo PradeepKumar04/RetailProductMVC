@@ -71,5 +71,16 @@ namespace EcommercePortalMVC.Controllers
             return RedirectToAction("Wishlist");
         }
 
-    }
+        [Route("UserWishlist/{userId}/{productId}")]
+        public IActionResult RemoveItem(int userId, int productId)
+        {
+            Product p = new Product();
+            Wishlist wishlist = new Wishlist() { Id = userId, ProductId = productId };
+            wishlist.Product = p.GetProducts().Find(s => s.Id == productId);
+            wishlists.Add(wishlist);
+            return RedirectToAction("Wishlist");
+        }
+
+
+        }
 }

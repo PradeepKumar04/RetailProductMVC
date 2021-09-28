@@ -13,6 +13,7 @@ namespace EcommercePortalMVC.Models
         public int ProductId { get; set; }
         public User User { get; set; }
         public Vendor Vendor { get; set; }
+        public DateTime OrderTime { get; set; }
         public Product Product { get; set; }
 
     }

@@ -1,67 +1,80 @@
 ﻿@model EcommercePortalMVC.Models.User
 
-@{
-    ViewData["Title"] = "Signup";
-}
+@{ ViewData["Title"] = "Signup"; }
 
-
-<h4>Signup</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Signup">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="col-sm-10 col-md-8 col-lg-7 mx-auto">
+        <div class="card border-0 shadow rounded-3 my-5">
+            <div class="card-body p-4 p-sm-5">
+                <h5 class="card-title text-center mb-5 fw-light fs-5">Sign Up</h5>
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+                    <div class="row">
+                        <div class="col">
+                            <label for="floatingInput">First Name</label>
+
+                            <div class="form-floating mb-3">
+                                <input asp-for="FirstName" type="text" class="form-control" id="floatingInput">
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label for="floatingInput">Last Name</label>
+                            <div class="form-floating mb-3">
+                                <input asp-for="LastName" type="text" class="form-control" id="floatingInput">
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <label for="floatingInput">Email</label>
+                        <input asp-for="Email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <label for="floatingInput">Phone Number</label>
+                        <input asp-for="PhoneNumber" type="tel" class="form-control" id="floatingInput">
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <label for="floatingInput">Address</label>
+                        <textarea asp-for="Address" class="form-control" id="floatingInput"></textarea>
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="floatingInput">Password</label>
+
+                            <div class="form-floating mb-3">
+                                <input asp-for="Password" type="password" class="form-control" id="floatingInput">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label for="floatingInput">Confirm Password</label>
+                            <div class="form-floating mb-3">
+                                <input asp-for="ConfirmPassword" type="password" class="form-control" id="floatingInput">
+                            </div>
+                        </div>
+
+                    </div>
+                    <span asp-validation-for="Password" class="text-danger mt-0"></span>
+                    <span asp-validation-for="ConfirmPassword" class="text-danger mt-0"></span>
+                    <br />
+                    <div class="d-grid">
+
+                        <button type="submit" asp-action="Login" asp-controller="User" class="btn btn-primary btn-login  fw-bold float-left mr-3" style="width:50%;border-radius:1rem;padding:1.5%;border:none;cursor:pointer">
+                            Sign Up
+                        </button>
+                    </div>
+
+                </form>
+                <div>
+                    <a asp-action="Login" asp-controller="User">Already have an Account?</a>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" />
-                <span asp-validation-for="UserName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <textarea asp-for="Address" class="form-control"></textarea>
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Zipcode" class="control-label"></label>
-                <input asp-for="Zipcode" class="form-control" />
-                <span asp-validation-for="Zipcode" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword" class="control-label"></label>
-                <input asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <input type="text" asp-for="Id" value="1" hidden />
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Login" asp-controller="User">Already have an Account?</a>
 </div>
 
 @section Scripts {

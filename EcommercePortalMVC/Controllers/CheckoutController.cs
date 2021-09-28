@@ -10,7 +10,13 @@ namespace EcommercePortalMVC.Controllers
     
     public class CheckoutController : Controller
     {
-        
+        public static List<Order> Orders = new List<Order>();
+
+        public IActionResult Order()
+        {
+            return View("OrderItem",Orders);
+        }
+
         public IActionResult OrderItem(int orderID,int productId,int vendorId,int userId)
         {
             Product p = new Product();
@@ -22,13 +28,19 @@ namespace EcommercePortalMVC.Controllers
             o.Vendor = vendor.GetVendors().Find(s=>s.Id==vendorId);
             o.Product = p.GetProducts().Find(s => s.Id == productId);
             o.User = new User() { Id = userId };
-            return View(o);
+            Orders.Add(o);
+            return RedirectToAction("Order");
         }
 
         public IActionResult AddRating(int rating, int pid,int id)
         {
 
             return RedirectToAction("GetProducts", "Products",new { id=id});
+        }
+
+        public IActionResult PaymentAddress()
+        {
+            return View();
         }
         
     }

@@ -806,3 +806,4 @@ D:\Stage-4\RetailProductMVC\EcommercePortalMVC\obj\Debug\netcoreapp3.1\Ecommerce
 D:\Stage-4\RetailProductMVC\EcommercePortalMVC\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Test.cshtml.g.cs
 D:\Stage-4\RetailProductMVC\EcommercePortalMVC\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Cart.cshtml.g.cs
 D:\Stage-4\RetailProductMVC\EcommercePortalMVC\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Wishlist.cshtml.g.cs
+D:\Stage-4\RetailProductMVC\EcommercePortalMVC\obj\Debug\netcoreapp3.1\Razor\Views\Checkout\PaymentAddress.cshtml.g.cs
