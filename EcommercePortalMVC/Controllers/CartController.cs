@@ -1,8 +1,12 @@
 ﻿using EcommercePortalMVC.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace EcommercePortalMVC.Controllers
@@ -12,75 +16,142 @@ namespace EcommercePortalMVC.Controllers
     {
         
 
-       public static List<Cart> carts = new List<Cart>();
-       public static List<Wishlist> wishlists = new List<Wishlist>();
+          
+          public static List<Wishlist> wishlists = new List<Wishlist>();
 
         [Route("Cart")]
         public IActionResult Cart()
         {
+            
+            var token = Request.Cookies["token"];
+            var handler = new JwtSecurityTokenHandler();
+            var jwtSecurityToken = handler.ReadJwtToken(token);
+            int id = int.Parse(jwtSecurityToken.Claims.First().Value);
+            List<Cart> carts = new Cart().GetCartsById(id);
+            if(carts==null)
+            {
+                return View(null);
+            }
+
+            foreach (var item in carts)
+            {
+                item.Product = new Product().GetProducts().Where(s => s.Id == item.ProductId).FirstOrDefault();
+                
+                item.ZipCode = 530026;
+            }
             return View(carts);
         }
 
-        [Route("UserCart/{userId}/{productId}")]
-        public IActionResult UserCart(int userId, int productId)
+        [Route("UserCart/{productId}")]
+        public async Task<IActionResult> UserCartAsync( int productId)
         {
-            TempData["user"] = userId;
-            Product p = new Product();
-            VendorStock vendorStock = new VendorStock();
-            Vendor vendor = new Vendor();
-            List<Product> products = p.GetProducts();
-            
-            VendorStock vendorStocks = vendorStock.GetStocks().Where(s => s.ProductId==productId).Where(s=>s.Quantity>0).ToList<VendorStock>().FirstOrDefault();
-            
-            if (vendorStocks==null)
+            TempData["message"] = null;
+            var token = Request.Cookies["token"];
+            var handler = new JwtSecurityTokenHandler();
+            var jwtSecurityToken = handler.ReadJwtToken(token);
+            int id = int.Parse(jwtSecurityToken.Claims.First().Value);
+            Cart cart = new Cart() { Id = id,
+                ProductId = productId,
+                ZipCode = 530026,
+                DeliveryDate = DateTime.Now.AddDays(5)
+            };
+           Cart c=await cart.AddProductToCartAsync();
+            if (c == null)
             {
-                return RedirectToAction("UserWishlist", new { userId = userId, productId = productId });
+                return RedirectToAction("GetProducts", "Products");
             }
-            Vendor vendors = vendor.GetVendors().Where(s => s.Id == vendorStocks.VendorId).FirstOrDefault();
-            Product p1= p.GetProducts().Where(s=>s.Id==productId).FirstOrDefault();
-            Cart c = new Cart() { ProductId = productId, Id = userId, ExpectedDelivery = DateTime.Now.AddDays(5), Product = p1, Vendor = vendors };
-            carts.Add(c);
-            return RedirectToAction("Cart");
+
+            else if (c.Vendor==null)
+            {
+                
+                return RedirectToAction("UserWishlist",productId);
+            }
+            
+            return RedirectToAction("Cart","Cart");
+            
         }
 
         [Route("UserWishlist")]
         public IActionResult Wishlist()
         {
+            var token = Request.Cookies["token"];
+            var handler = new JwtSecurityTokenHandler();
+            var jwtSecurityToken = handler.ReadJwtToken(token);
+            int id = int.Parse(jwtSecurityToken.Claims.First().Value);
+            List<Wishlist> wishlists = new Wishlist().GetWishlists(id);
+            foreach (var item in wishlists)
+            {
+                item.Product = new Product().GetProducts().Where(s => s.Id == item.ProductId).FirstOrDefault();
+            }
             return View(wishlists);
         }
 
         [Route("UserWishlist/{productId}")]
         public IActionResult UserWishlist( int productId)
         {
+            var token = Request.Cookies["token"];
+            var handler = new JwtSecurityTokenHandler();
+            var jwtSecurityToken = handler.ReadJwtToken(token);
+            int id = int.Parse(jwtSecurityToken.Claims.First().Value);
             Product p = new Product();
             Wishlist wishlist = new Wishlist() {  ProductId = productId };
-            wishlist.Id = (int)TempData["user"];
-            wishlist.Product = p.GetProducts().Find(s => s.Id == productId);
-            wishlists.Add(wishlist);
-            return RedirectToAction("Wishlist");
+            wishlist.Id = id;
+            wishlist.DateAddedToWishList = DateTime.Now;
+            wishlist.Product = p.GetProducts().Where(s=>s.Id==productId).FirstOrDefault();
+            if(new Wishlist().AddToWishlistAsync(wishlist).Result)
+            {
+                return RedirectToAction("Wishlist");
+            }
+            else
+            {
+                return View("Wishlist");
+            }
 
         }
 
-        [Route("UserWishlist/{userId}/{productId}")]
-        public IActionResult UserWishlist(int userId,int productId)
+
+        
+
+        [Route("RemoveCartItem/{productId}")]
+        public IActionResult RemoveCartItem( int productId)
         {
-            Product p = new Product();
-            Wishlist wishlist = new Wishlist() { Id=userId,ProductId=productId};
-            wishlist.Product = p.GetProducts().Find(s=>s.Id==productId);
-            wishlists.Add(wishlist);
-            return RedirectToAction("Wishlist");
+            var token = Request.Cookies["token"];
+            var handler = new JwtSecurityTokenHandler();
+            var jwtSecurityToken = handler.ReadJwtToken(token);
+            int id = int.Parse(jwtSecurityToken.Claims.First().Value);
+            if (new Cart().RemoveProductFromCart(id,productId).Result)
+            {
+                return RedirectToAction("Cart");
+            }
+            return RedirectToAction("Cart");
         }
 
-        [Route("UserWishlist/{userId}/{productId}")]
-        public IActionResult RemoveItem(int userId, int productId)
+        [Route("MoveToCart/{productId}")]
+        public IActionResult MoveToCart(int productId)
         {
-            Product p = new Product();
-            Wishlist wishlist = new Wishlist() { Id = userId, ProductId = productId };
-            wishlist.Product = p.GetProducts().Find(s => s.Id == productId);
-            wishlists.Add(wishlist);
+            var token = Request.Cookies["token"];
+            var handler = new JwtSecurityTokenHandler();
+            var jwtSecurityToken = handler.ReadJwtToken(token);
+            int id = int.Parse(jwtSecurityToken.Claims.First().Value);
+            RemoveCartItem(productId);
+            UserWishlist(productId);
+            return RedirectToAction("Wishlist");
+        }
+
+        [Route("RemoveWishlistItem/{productId}")]
+        public IActionResult RemoveWishlistItem(int productId)
+        {
+            var token = Request.Cookies["token"];
+            var handler = new JwtSecurityTokenHandler();
+            var jwtSecurityToken = handler.ReadJwtToken(token);
+            int id = int.Parse(jwtSecurityToken.Claims.First().Value);
+            if (new Wishlist().RemoveProductFromWishlist(id, productId).Result)
+            {
+                return RedirectToAction("Wishlist");
+            }
             return RedirectToAction("Wishlist");
         }
 
 
-        }
+    }
 }

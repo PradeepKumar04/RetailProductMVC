@@ -18,7 +18,7 @@
             <div class="col">
                 @foreach (var item in Model)
                 {
-                    <a asp-action="ProductData" asp-controller="ProductDetails" asp-route-uid="@ViewContext.RouteData.Values["id"]" asp-route-pid="@item.Id" style="text-decoration:none;color:black">
+                    <a asp-action="ProductData" asp-controller="ProductDetails"  asp-route-pid="@item.Id" style="text-decoration:none;color:black">
                     <div class="card float-left" style="width: 18rem;margin: 20px;">
                         <div class="view overlay example example-cover">
                             <img src="@item.Image_Name"
@@ -41,10 +41,9 @@
                             <h6 class="mb-2">
                                 <span class="text-danger mr-1">&#8377; @item.Price</span>
                             </h6>
-                            <a asp-controller="Cart" asp-action="UserCart" asp-route-userId="@ViewContext.RouteData.Values["id"]" asp-route-productId="@item.Id" class="btn btn-primary btn-sm mr-5" style="cursor:pointer"><i class="material-icons md-18" style="vertical-align: middle;">shopping_cart</i>Add to Cart</a>
-                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist">
-                                <i class="material-icons md-18" style="vertical-align: middle;float:right">favorite_border</i>
-                            </button>
+                            <a asp-controller="Cart" asp-action="UserCart"  asp-route-productId="@item.Id" class="btn btn-primary btn-sm mr-5" style="cursor:pointer"><i class="material-icons md-18" style="vertical-align: middle;">shopping_cart</i>Add to Cart</a>
+                            <a class="btn btn-outline-danger" asp-action="UserWishlist" asp-controller="Cart" asp-route-productId="@item.Id"><i class="material-icons md-18" style="vertical-align: middle;float:right">favorite_border</i></a>
+                            
                         </div>
 
                     </div>

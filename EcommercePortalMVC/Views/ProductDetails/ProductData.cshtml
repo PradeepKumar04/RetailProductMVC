@@ -22,11 +22,11 @@
                 <span class="fa fa-star"></span>
 
             }
-            <a href="#" class="text-secondary ml-4"><i class="material-icons md-18" style="vertical-align: middle;">favorite</i>Save for Later</a>
+            <a asp-action="UserWishlist" asp-controller="Cart" asp-route-productId="@Model.Product.Id" class="text-secondary ml-4"><i class="material-icons md-18" style="vertical-align: middle;">favorite</i>Save for Later</a>
             <hr />
             <h5><b>Small description</b></h5>
             <p class="text-secondary">@Model.Product.Description</p>
-            @if (TempData["wish"].ToString() == "0")
+            @if (Model.Vendor!=null)
             {
                 <p class="float-left">Selling by @Model.Vendor.VendorName</p>
                 <div>
@@ -43,18 +43,17 @@
                 </div><br>
 
                 <h5><b>&#8377; @Model.Product.Price</b></h5>
-                @if (TempData["user"] != null)
-                {
-                    <a class="btn btn-primary" href="@Url.Action("OrderItem", "Checkout", new { orderId = 0, VendorId = Model.Vendor.Id, ProductId = Model.Product.Id, UserId = (int)TempData["user"] })"> Buy Now</a>
-                    <a asp-controller="Cart" asp-action="UserCart" asp-route-userId="1" asp-route-productId="@Model.Product.Id" class="btn btn-info btn-sm mr-5" style="cursor:pointer"><i class="material-icons md-18" style="vertical-align: middle;">shopping_cart</i>Add to Cart</a>
+                <a class="btn btn-primary" asp-action="PaymentAddress" asp-controller="Checkout" asp-route-productId="@Model.Product.Id">Buy Now</a>
+                   // <a class="btn btn-primary" href="@Url.Action("OrderItem", "Checkout", new { orderId = 0, VendorId = Model.Vendor.Id, ProductId = Model.Product.Id })"> Buy Now</a>
+                    <a asp-controller="Cart" asp-action="UserCart" asp-route-productId="@Model.Product.Id" class="btn btn-info btn-sm mr-5" style="cursor:pointer"><i class="material-icons md-18" style="vertical-align: middle;">shopping_cart</i>Add to Cart</a>
 
-                }
+                
 
             }
             else
             {
                 <h3 class="text-danger">Product is Out of Stock</h3>
-                <a class="btn btn-primary" asp-action="UserWishlist" asp-controller="Cart" asp-route-userId="@ViewContext.RouteData.Values["uid"]" asp-route-productId="@Model.Product.Id">Add to Wishlist</a>
+                <a class="btn btn-primary" asp-action="UserWishlist" asp-controller="Cart"  asp-route-productId="@Model.Product.Id">Add to Wishlist</a>
             }
         </div>
     </div>

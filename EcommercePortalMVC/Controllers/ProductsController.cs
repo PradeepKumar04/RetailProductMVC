@@ -1,4 +1,5 @@
 ﻿using EcommercePortalMVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,27 +9,19 @@ using System.Threading.Tasks;
 namespace EcommercePortalMVC.Controllers
 {
     [Route("Products")]
+    [AllowAnonymous]
     public class ProductsController : Controller
     {
 
-        [Route("GetProducts/{id}")]
-        public IActionResult GetProducts(int id)
+        [Route("GetProducts")]
+        public IActionResult GetProducts()
         {
-            TempData["user"] = id;
+            
             Product p = new Product();
             List<Product> products = p.GetProducts();
             return View(products);
         }
-        [Route("Test")]
-        public IActionResult Test()
-        {
-            return View();
-        }
-
-
-
         
-
         [Route("SearchProduct/{item:int}")]
         public IActionResult SearchProduct(int item)
         {
@@ -40,9 +33,6 @@ namespace EcommercePortalMVC.Controllers
             return View("GetProducts", ps);
         }
 
-
-       
-        
 
         [Route("SearchProduct/{item}")]
         public IActionResult SearchProduct(string item)

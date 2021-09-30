@@ -34,15 +34,15 @@
                                             <h5>@item.Product.Name</h5>
                                             <p class="mb-3 text-muted text-uppercase small">@item.Product.Description</p>
                                             <h5 class="mb-4">Expected shipping delivery</h5>
-                                            <p class="mb-3 text-warning">@item.ExpectedDelivery</p>
+                                            <p class="mb-3 text-warning">@item.DeliveryDate</p>
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div>
-                                            <a href="#!" type="button" class="card-link-secondary small text-uppercase mr-3" style="text-decoration: none;color:red;">
+                                            <a asp-action="RemoveCartItem" asp-controller="Cart" asp-route-productId="@item.ProductId" type="button" class="card-link-secondary small text-uppercase mr-3" style="text-decoration: none;color:red;">
                                                 <i class="material-icons md-18" style="vertical-align: middle;color:red;">delete</i>Remove item
                                             </a>
-                                            <a asp-action="UserWishlist" asp-controller="Cart" asp-route-userId='1' asp-route-productId="@item.Product.Id" class="card-link-secondary small text-uppercase" style="text-decoration: none;">
+                                            <a asp-action="MoveToCart" asp-controller="Cart"  asp-route-productId="@item.Product.Id" class="card-link-secondary small text-uppercase" style="text-decoration: none;">
                                                 <i class="material-icons md-18" style="vertical-align: middle;">favorite</i> Move to wish list
                                             </a>
                                         </div>
@@ -120,7 +120,7 @@
                         </li>
                     </ul>
                     <form asp-action="">
-                        <button type="submit" asp-action="PaymentAddress" asp-controller="Checkout" class="btn btn-info btn-block">Go to Checkout</button>
+                        <button type="submit" asp-action="PaymentAddress" asp-controller="Checkout"  class="btn btn-info btn-block">Go to Checkout</button>
                     </form>
 
                 </div>

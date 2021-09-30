@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace EcommercePortalMVC.Models
@@ -13,20 +15,24 @@ namespace EcommercePortalMVC.Models
         public DateTime ExpectedStockReplinshmentDate { get; set; }
 
 
-        public List<VendorStock> GetStocks()
+        
+        public Vendor GetVendorByProductId(int productId)
         {
-            List<VendorStock> vendorStocks = new List<VendorStock>()
+            Vendor vendor = null;
+            string url = String.Format("https://localhost:44380/GetVendor/" + productId);
+            using (var client = new HttpClient())
             {
-                new VendorStock(){VendorId=1,ProductId=1,Quantity=5,ExpectedStockReplinshmentDate=DateTime.Now},
-                new VendorStock(){VendorId=2,ProductId=1,Quantity=6,ExpectedStockReplinshmentDate=DateTime.Now},
-                new VendorStock(){VendorId=1,ProductId=2,Quantity=5,ExpectedStockReplinshmentDate=DateTime.Now},
-                new VendorStock(){VendorId=1,ProductId=3,Quantity=5,ExpectedStockReplinshmentDate=DateTime.Now},
-                new VendorStock(){VendorId=1,ProductId=4,Quantity=5,ExpectedStockReplinshmentDate=DateTime.Now},
-                new VendorStock(){VendorId=1,ProductId=5,Quantity=0,ExpectedStockReplinshmentDate=DateTime.Now},
-                new VendorStock(){VendorId=1,ProductId=6,Quantity=5,ExpectedStockReplinshmentDate=DateTime.Now},
-                new VendorStock(){VendorId=1,ProductId=7,Quantity=5,ExpectedStockReplinshmentDate=DateTime.Now},
-            };
-            return vendorStocks;
+                client.BaseAddress = new Uri(url);
+                var responseTask = client.GetAsync("");
+                responseTask.Wait();
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var result1 = result.Content.ReadAsStringAsync().Result;
+                    vendor= JsonConvert.DeserializeObject<Vendor>(result1);
+                }
+            }
+            return vendor;
         }
     }
 
