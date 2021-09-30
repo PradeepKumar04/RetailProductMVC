@@ -8,10 +8,12 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EcommercePortalMVC.Controllers
 {
     [Route("Cart")]
+    [Authorize]
     public class CartController : Controller
     {
         
@@ -63,13 +65,45 @@ namespace EcommercePortalMVC.Controllers
 
             else if (c.Vendor==null)
             {
-                
-                return RedirectToAction("UserWishlist",productId);
+                Product p = new Product();
+                Wishlist wishlist = new Wishlist() { ProductId = productId };
+                wishlist.Id = id;
+                wishlist.DateAddedToWishList = DateTime.Now;
+                wishlist.Product = p.GetProducts().Where(s => s.Id == productId).FirstOrDefault();
+                if (new Wishlist().AddToWishlistAsync(wishlist).Result)
+                {
+                    return RedirectToAction("Wishlist");
+                }
+                return RedirectToAction("UserWishlist");
             }
             
             return RedirectToAction("Cart","Cart");
             
         }
+
+        [Route("UserWishlist/{productId}")]
+        public IActionResult UserWishlist(int productId)
+        {
+            var token = Request.Cookies["token"];
+            var handler = new JwtSecurityTokenHandler();
+            var jwtSecurityToken = handler.ReadJwtToken(token);
+            int id = int.Parse(jwtSecurityToken.Claims.First().Value);
+            Product p = new Product();
+            Wishlist wishlist = new Wishlist() { ProductId = productId };
+            wishlist.Id = id;
+            wishlist.DateAddedToWishList = DateTime.Now;
+            wishlist.Product = p.GetProducts().Where(s => s.Id == productId).FirstOrDefault();
+            if (new Wishlist().AddToWishlistAsync(wishlist).Result)
+            {
+                return RedirectToAction("Wishlist");
+            }
+            else
+            {
+                return View("Wishlist");
+            }
+
+        }
+
 
         [Route("UserWishlist")]
         public IActionResult Wishlist()
@@ -86,29 +120,7 @@ namespace EcommercePortalMVC.Controllers
             return View(wishlists);
         }
 
-        [Route("UserWishlist/{productId}")]
-        public IActionResult UserWishlist( int productId)
-        {
-            var token = Request.Cookies["token"];
-            var handler = new JwtSecurityTokenHandler();
-            var jwtSecurityToken = handler.ReadJwtToken(token);
-            int id = int.Parse(jwtSecurityToken.Claims.First().Value);
-            Product p = new Product();
-            Wishlist wishlist = new Wishlist() {  ProductId = productId };
-            wishlist.Id = id;
-            wishlist.DateAddedToWishList = DateTime.Now;
-            wishlist.Product = p.GetProducts().Where(s=>s.Id==productId).FirstOrDefault();
-            if(new Wishlist().AddToWishlistAsync(wishlist).Result)
-            {
-                return RedirectToAction("Wishlist");
-            }
-            else
-            {
-                return View("Wishlist");
-            }
-
-        }
-
+        
 
         
 

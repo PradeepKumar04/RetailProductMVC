@@ -1193,8 +1193,6 @@ C:\Users\dilip\source\repos\RetailProductMVC\EcommercePortalMVC\obj\Debug\netcor
 C:\Users\dilip\source\repos\RetailProductMVC\EcommercePortalMVC\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Wishlist.cshtml.g.cs
 C:\Users\dilip\source\repos\RetailProductMVC\EcommercePortalMVC\obj\Debug\netcoreapp3.1\Razor\Views\Checkout\OrderItem.cshtml.g.cs
 C:\Users\dilip\source\repos\RetailProductMVC\EcommercePortalMVC\obj\Debug\netcoreapp3.1\Razor\Views\Checkout\PaymentAddress.cshtml.g.cs
-C:\Users\dilip\source\repos\RetailProductMVC\EcommercePortalMVC\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
-C:\Users\dilip\source\repos\RetailProductMVC\EcommercePortalMVC\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\dilip\source\repos\RetailProductMVC\EcommercePortalMVC\obj\Debug\netcoreapp3.1\Razor\Views\ProductDetails\ProductData.cshtml.g.cs
 C:\Users\dilip\source\repos\RetailProductMVC\EcommercePortalMVC\obj\Debug\netcoreapp3.1\Razor\Views\Products\GetProducts.cshtml.g.cs
 C:\Users\dilip\source\repos\RetailProductMVC\EcommercePortalMVC\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs

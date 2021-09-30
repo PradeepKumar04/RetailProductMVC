@@ -2,7 +2,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -39,6 +41,9 @@ namespace EcommercePortalMVC
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
 
+            }).AddCookie(options =>
+            {
+                options.LoginPath = new PathString("/login");
             })
             .AddJwtBearer(x => {
                 x.Events = new JwtBearerEvents
@@ -60,6 +65,7 @@ namespace EcommercePortalMVC
                     ValidateAudience = false
                 };
             });
+            
 
         }
 
@@ -83,6 +89,7 @@ namespace EcommercePortalMVC
 
             app.UseAuthentication();
             app.UseAuthorization();
+            
 
             app.UseEndpoints(endpoints =>
             {
