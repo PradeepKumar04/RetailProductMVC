@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,7 +34,7 @@ namespace EcommercePortalMVC
             string SECRET = Configuration.GetSection("secret").Value;
             
             var key = Encoding.ASCII.GetBytes(SECRET);
-
+            
             services.AddAuthentication(x =>
             {
                 x.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -55,6 +56,8 @@ namespace EcommercePortalMVC
                     }
                 };
 
+                
+
                 x.RequireHttpsMetadata = true;
                 x.SaveToken = true;
                 x.TokenValidationParameters = new TokenValidationParameters
@@ -65,7 +68,19 @@ namespace EcommercePortalMVC
                     ValidateAudience = false
                 };
             });
-            
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.Name = "token";
+                options.Cookie.SameSite = SameSiteMode.None;
+                options.LoginPath = new PathString("/User/Login");
+                options.AccessDeniedPath = new PathString("/User/Login");
+                options.Events.OnRedirectToLogin = context =>
+                {
+                    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                    return Task.CompletedTask;
+                };
+            });
 
         }
 
@@ -89,7 +104,13 @@ namespace EcommercePortalMVC
 
             app.UseAuthentication();
             app.UseAuthorization();
-            
+            app.UseStatusCodePages(context => {
+                var response = context.HttpContext.Response;
+                if (response.StatusCode == (int)HttpStatusCode.Unauthorized ||
+                    response.StatusCode == (int)HttpStatusCode.Forbidden)
+                    response.Redirect("/Login");
+                return Task.CompletedTask;
+            });
 
             app.UseEndpoints(endpoints =>
             {

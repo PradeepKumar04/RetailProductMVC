@@ -20,6 +20,28 @@ namespace EcommercePortalMVC.Controllers
             return View();
         }
 
+
+
+        public IActionResult Logout()
+        {
+            string url = String.Format("https://localhost:44380/User/Logout");
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(url);
+                var responseTask = client.GetAsync("");
+                responseTask.Wait();
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var result1 = result.Content.ReadAsStringAsync().Result;
+                    Response.Cookies.Delete("token");
+                    return RedirectToAction("Login", "User");
+                }
+            }
+            return RedirectToAction("Login", "User");
+
+        }
+
         [HttpPost]
         public async Task<IActionResult> Login(User user)
         {
@@ -44,11 +66,11 @@ namespace EcommercePortalMVC.Controllers
                     string result = await response.Content.ReadAsStringAsync();
                     if (response.IsSuccessStatusCode)
                     {
-                        Response.Cookies.Append("token", result, new Microsoft.AspNetCore.Http.CookieOptions
-                        {
-                            HttpOnly = true,
+                            Response.Cookies.Append("token", result, new Microsoft.AspNetCore.Http.CookieOptions
+                            {
+                                HttpOnly = true,
 
-                        });
+                            });
                         var handler = new JwtSecurityTokenHandler();
                         var jwtSecurityToken = handler.ReadJwtToken(result);
                         int id = int.Parse(jwtSecurityToken.Claims.First().Value);

@@ -28,11 +28,15 @@ namespace EcommercePortalMVC.Controllers
 
         }
 
-        public async Task<IActionResult> AddRatingAsync(double rating, int pid,int id)
+        public async Task<IActionResult> AddRating(int rating, int pid)
         {
+            var token = Request.Cookies["token"];
+            var handler = new JwtSecurityTokenHandler();
+            var jwtSecurityToken = handler.ReadJwtToken(token);
+            int id = int.Parse(jwtSecurityToken.Claims.First().Value);
             using (var client = new HttpClient())
             {
-                Rating rate = new Rating() { ProductRating = rating+1, ProductId = pid, UserId = id };
+                Rating rate = new Rating() { ProductRating = rating, ProductId = pid, UserId = id };
                 
                 string json = JsonConvert.SerializeObject(rate);
 
