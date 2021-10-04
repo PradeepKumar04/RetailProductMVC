@@ -71,9 +71,7 @@ namespace EcommercePortalMVC.Controllers
                                 HttpOnly = true,
 
                             });
-                        var handler = new JwtSecurityTokenHandler();
-                        var jwtSecurityToken = handler.ReadJwtToken(result);
-                        int id = int.Parse(jwtSecurityToken.Claims.First().Value);
+                       
                         return RedirectToAction("GetProducts", "Products");
                     }
                     else

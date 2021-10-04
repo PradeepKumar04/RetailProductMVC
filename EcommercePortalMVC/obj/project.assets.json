@@ -6656,11 +6656,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dilip\\source\\repos\\RetailProductMVC\\EcommercePortalMVC\\EcommercePortalMVC.csproj",
+      "projectUniqueName": "C:\\Users\\dilip\\Project\\RetailProductMVC\\EcommercePortalMVC\\EcommercePortalMVC.csproj",
       "projectName": "EcommercePortalMVC",
-      "projectPath": "C:\\Users\\dilip\\source\\repos\\RetailProductMVC\\EcommercePortalMVC\\EcommercePortalMVC.csproj",
+      "projectPath": "C:\\Users\\dilip\\Project\\RetailProductMVC\\EcommercePortalMVC\\EcommercePortalMVC.csproj",
       "packagesPath": "C:\\Users\\dilip\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dilip\\source\\repos\\RetailProductMVC\\EcommercePortalMVC\\obj\\",
+      "outputPath": "C:\\Users\\dilip\\Project\\RetailProductMVC\\EcommercePortalMVC\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

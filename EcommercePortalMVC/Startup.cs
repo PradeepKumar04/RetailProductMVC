@@ -69,18 +69,7 @@ namespace EcommercePortalMVC
                 };
             });
 
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.Cookie.Name = "token";
-                options.Cookie.SameSite = SameSiteMode.None;
-                options.LoginPath = new PathString("/User/Login");
-                options.AccessDeniedPath = new PathString("/User/Login");
-                options.Events.OnRedirectToLogin = context =>
-                {
-                    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                    return Task.CompletedTask;
-                };
-            });
+            
 
         }
 
