@@ -26,7 +26,7 @@ else
 
                 <!-- Card -->
                 <div class="mb-3">
-                    <div class="pt-4 wish-list" id="wishlist" >
+                    <div class="pt-4 wish-list" id="wishlist">
                         <h5 class="mb-4">Cart (<span>@Model.Count()</span> items)</h5>
                         @foreach (var item in Model)
                         {
@@ -49,11 +49,11 @@ else
                                         </div>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div>
-                                                <a asp-action="RemoveCartItem" asp-controller="Cart" asp-route-productId="@item.ProductId" type="button" class="card-link-secondary small text-uppercase mr-3" style="text-decoration: none;color:red;">
-                                                    <i class="material-icons md-18" style="vertical-align: middle;color:red;">delete</i>Remove item
+                                                <a id="a3" asp-action="RemoveCartItem" asp-controller="Cart" asp-route-productId="@item.ProductId" type="button" class="card-link-secondary small text-uppercase mr-3">
+                                                    <i class="material-icons md-18" id="icon2">delete</i>Remove item
                                                 </a>
-                                                <a asp-action="MoveToCart" asp-controller="Cart" asp-route-productId="@item.Product.Id" class="card-link-secondary small text-uppercase" style="text-decoration: none;">
-                                                    <i class="material-icons md-18" style="vertical-align: middle;">favorite</i> Move to wish list
+                                                <a id="a4" asp-action="MoveToCart" asp-controller="Cart" asp-route-productId="@item.Product.Id" class="card-link-secondary small text-uppercase">
+                                                    <i class="material-icons md-18" id="icon3">favorite</i> Move to wish list
                                                 </a>
                                             </div>
                                             <p class="mb-0 mr-4"><span><strong id="summary">&#8377; @item.Product.Price</strong></span></p>

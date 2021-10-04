@@ -14,46 +14,45 @@
     }
     else
     {
-<div class="row">
+        <div class="row">
 
-    @foreach (var item in Model)
-    {
-        <div class="col-lg-3 m-4">
-            <a asp-action="ProductData" asp-controller="ProductDetails" asp-route-pid="@item.Id" style="text-decoration:none;color:black">
-                <div class="card float-left" style="width: 17rem;margin: 20px;">
-                    <div class="view overlay example example-cover">
-                        <img src="@item.Image_Name" id="c1"
-                             alt="Sample">
-                    </div>
-                    <div class="card-body text-center mt-0">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3 m-4">
+                    <a asp-action="ProductData" id="a1" asp-controller="ProductDetails" asp-route-pid="@item.Id">
+                        <div class="card float-left" id="dv">
+                            <div class="view overlay example example-cover">
+                                <img src="@item.Image_Name" id="c1"
+                                     alt="Sample">
+                            </div>
+                            <div class="card-body text-center mt-0">
 
-                        <h5>@item.Name</h5>
-                        <p class="small text-muted text-uppercase mb-2">@item.Description</p>
-                        @for (int i = 0; i < (int)item.Rating; i++)
-                        {
-                            <span class="fa fa-star checked" style="color: orange;"></span>
+                                <h5>@item.Name</h5>
+                                <p class="small text-muted text-uppercase mb-2">@item.Description</p>
+                                @for (int i = 0; i < (int)item.Rating; i++)
+                                {
+                                    <span class="fa fa-star checked" id="star"></span>
 
-                        }
-                        @for (int i = (int)item.Rating; i < 5; i++)
-                        {
-                            <span class="fa fa-star"></span>
+                                }
+                                @for (int i = (int)item.Rating; i < 5; i++)
+                                {
+                                    <span class="fa fa-star"></span>
 
-                        }
-                        <h6 class="mb-2">
-                            <span class="text-danger mr-1">&#8377; @item.Price</span>
-                        </h6>
-                        <a asp-controller="Cart" asp-action="UserCart" asp-route-productId="@item.Id" class="btn btn-primary btn-sm mr-5" style="cursor:pointer">Procceed to Buy</a>
-                        <a class="btn btn-outline-danger" asp-action="UserWishlist" asp-controller="Cart" asp-route-productId="@item.Id"><i class="material-icons md-18" style="vertical-align: middle;float:right">favorite_border</i></a>
+                                }
+                                <h6 class="mb-2">
+                                    <span class="text-danger mr-1">&#8377; @item.Price</span>
+                                </h6>
+                                <a asp-controller="Cart" id="a2" asp-action="UserCart" asp-route-productId="@item.Id" class="btn btn-primary btn-sm mr-5">Procceed to Buy</a>
+                                <a class="btn btn-outline-danger" asp-action="UserWishlist" asp-controller="Cart" asp-route-productId="@item.Id"><i id="icon1" class="material-icons md-18">favorite_border</i></a>
+                            </div>
 
-                    </div>
+                        </div>
 
+                    </a>
                 </div>
+            }
 
-            </a>
         </div>
-    }
-
-</div>
     }
 
 </div>

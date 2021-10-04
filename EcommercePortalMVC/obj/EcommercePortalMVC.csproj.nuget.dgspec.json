@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "H:\\cognizant\\Retail\\RetailProductMVC\\EcommercePortalMVC\\EcommercePortalMVC.csproj": {}
+    "E:\\1dotnetcore handson\\RetailProductMVC\\EcommercePortalMVC\\EcommercePortalMVC.csproj": {}
   },
   "projects": {
-    "H:\\cognizant\\Retail\\RetailProductMVC\\EcommercePortalMVC\\EcommercePortalMVC.csproj": {
+    "E:\\1dotnetcore handson\\RetailProductMVC\\EcommercePortalMVC\\EcommercePortalMVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "H:\\cognizant\\Retail\\RetailProductMVC\\EcommercePortalMVC\\EcommercePortalMVC.csproj",
+        "projectUniqueName": "E:\\1dotnetcore handson\\RetailProductMVC\\EcommercePortalMVC\\EcommercePortalMVC.csproj",
         "projectName": "EcommercePortalMVC",
-        "projectPath": "H:\\cognizant\\Retail\\RetailProductMVC\\EcommercePortalMVC\\EcommercePortalMVC.csproj",
-        "packagesPath": "C:\\Users\\karthik\\.nuget\\packages\\",
-        "outputPath": "H:\\cognizant\\Retail\\RetailProductMVC\\EcommercePortalMVC\\obj\\",
+        "projectPath": "E:\\1dotnetcore handson\\RetailProductMVC\\EcommercePortalMVC\\EcommercePortalMVC.csproj",
+        "packagesPath": "C:\\Users\\MYPC\\.nuget\\packages\\",
+        "outputPath": "E:\\1dotnetcore handson\\RetailProductMVC\\EcommercePortalMVC\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\karthik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\MYPC\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://www.nuget.org/api/v2": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
@@ -95,7 +95,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     }

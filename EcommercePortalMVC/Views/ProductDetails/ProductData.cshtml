@@ -2,61 +2,61 @@
 @{
     ViewData["Title"] = "Product";
     Order order = new Order();
-    
+
 }
 
 <div class="container">
     <div class="card p-5">
-    <div class="row">
-        <div class="col-lg-6">
-            <img src="@Model.Product.Image_Name" class="img-fluid"/>
+        <div class="row">
+            <div class="col-lg-6">
+                <img src="@Model.Product.Image_Name" class="img-fluid" />
+            </div>
+            <div class="col-lg-6">
+                <h2>@Model.Product.Name</h2>
+                @for (int i = 0; i < (int)Model.Product.Rating; i++)
+                {
+                    <span class="fa fa-star checked" id="star"></span>
+                }
+                @for (int i = (int)Model.Product.Rating; i < 5; i++)
+                {
+                    <span class="fa fa-star"></span>
+
+                }
+                <a asp-action="UserWishlist" asp-controller="Cart" asp-route-productId="@Model.Product.Id" class="text-secondary ml-4"><i class="material-icons md-18" id="icon3">favorite</i>Save for Later</a>
+                <hr />
+                <h5><b>Small description</b></h5>
+                <p class="text-secondary">@Model.Product.Description</p>
+                @if (Model.Vendor != null)
+                {
+                    <p class="float-left">Selling by @Model.Vendor.VendorName</p>
+                    <div>
+                        <span>(</span>
+                        @for (int i = 0; i < (int)Model.Vendor.Rating; i++)
+                        {
+                            <span class="fa fa-star checked" id="star"></span>
+                        }
+                        @for (int i = (int)Model.Vendor.Rating; i < 5; i++)
+                        {
+                            <span class="fa fa-star"></span>
+                        }
+                        <span>)</span>
+                    </div><br>
+
+                    <h5><b>&#8377; @Model.Product.Price</b></h5>
+                    <a class="btn btn-primary" asp-action="PaymentAddress" asp-controller="Checkout" asp-route-productId="@Model.Product.Id">Buy Now</a>
+                    // <a class="btn btn-primary" href="@Url.Action("OrderItem", "Checkout", new { orderId = 0, VendorId = Model.Vendor.Id, ProductId = Model.Product.Id })"> Buy Now</a>
+                    <a asp-controller="Cart" asp-action="UserCart" asp-route-productId="@Model.Product.Id" class="btn btn-info btn-sm mr-5" id="a2"><i class="material-icons md-18" id="icon3">shopping_cart</i>Add to Cart</a>
+
+
+
+                }
+                else
+                {
+                    <h3 class="text-danger">Product is Out of Stock</h3>
+                    <a class="btn btn-primary" asp-action="UserWishlist" asp-controller="Cart" asp-route-productId="@Model.Product.Id">Add to Wishlist</a>
+                }
+            </div>
         </div>
-        <div class="col-lg-6">
-            <h2>@Model.Product.Name</h2>
-            @for (int i = 0; i < (int)Model.Product.Rating; i++)
-            {
-                <span class="fa fa-star checked" style="color: orange;"></span>
-            }
-            @for (int i = (int)Model.Product.Rating; i < 5; i++)
-            {
-                <span class="fa fa-star"></span>
-
-            }
-            <a asp-action="UserWishlist" asp-controller="Cart" asp-route-productId="@Model.Product.Id" class="text-secondary ml-4"><i class="material-icons md-18" style="vertical-align: middle;">favorite</i>Save for Later</a>
-            <hr />
-            <h5><b>Small description</b></h5>
-            <p class="text-secondary">@Model.Product.Description</p>
-            @if (Model.Vendor!=null)
-            {
-                <p class="float-left">Selling by @Model.Vendor.VendorName</p>
-                <div>
-                    <span>(</span>
-                    @for (int i = 0; i < (int)Model.Vendor.Rating; i++)
-                    {
-                        <span class="fa fa-star checked" style="color: orange;"></span>
-                    }
-                    @for (int i = (int)Model.Vendor.Rating; i < 5; i++)
-                    {
-                        <span class="fa fa-star"></span>
-                    }
-                    <span>)</span>
-                </div><br>
-
-                <h5><b>&#8377; @Model.Product.Price</b></h5>
-                <a class="btn btn-primary" asp-action="PaymentAddress" asp-controller="Checkout" asp-route-productId="@Model.Product.Id">Buy Now</a>
-                   // <a class="btn btn-primary" href="@Url.Action("OrderItem", "Checkout", new { orderId = 0, VendorId = Model.Vendor.Id, ProductId = Model.Product.Id })"> Buy Now</a>
-                    <a asp-controller="Cart" asp-action="UserCart" asp-route-productId="@Model.Product.Id" class="btn btn-info btn-sm mr-5" style="cursor:pointer"><i class="material-icons md-18" style="vertical-align: middle;">shopping_cart</i>Add to Cart</a>
-
-                
-
-            }
-            else
-            {
-                <h3 class="text-danger">Product is Out of Stock</h3>
-                <a class="btn btn-primary" asp-action="UserWishlist" asp-controller="Cart"  asp-route-productId="@Model.Product.Id">Add to Wishlist</a>
-            }
-        </div>
-    </div>
     </div>
 </div>
 

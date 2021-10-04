@@ -4,39 +4,38 @@
     <h3 class="text-info text-center"> Your Orders</h3>
     @foreach (var item in Model)
     {
-    <div class="card p-5 w-75 h-50">
-        <div class="row">
-            <div class="col">
-                <h5 class="text-secondary">Order Id 12243455<span>@item.Id</span></h5>
-                <h5 class="text-secondary">Placed on @item.OrderTime.ToShortDateString()</h5>
+        <div class="card p-5 w-75 h-50">
+            <div class="row">
+                <div class="col">
+                    <h5 class="text-secondary">Order Id 12243455<span>@item.Id</span></h5>
+                    <h5 class="text-secondary">Placed on @item.OrderTime.ToShortDateString()</h5>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col">
+                    <h5>@item.Product.Name</h5>
+                    <p class="text-secondary">QT. 1</p>
+                    <h5>&#8377; @item.Product.Price <span class="text-primary">via (Card)</span></h5>
+                    <h5 class="text-warning">Tracking Status on: @DateTime.Now.ToShortDateString()</h5>
+                    <h4 class="text-info">Status Processing..</h4>
+                </div>
+                <div class="col view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+                    <img class="img-fluid w-100"
+                         src="@item.Product.Image_Name" alt="Sample">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h4>Rate this Product</h4>
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        <a asp-action="AddRating" id="a5" asp-controller="Checkout" asp-route-pid="@item.ProductId" asp-route-rating="@i"><span class="fa fa-star checked" id="sp1"></span></a>
+                    }
+                </div>
             </div>
         </div>
-        <hr />
-        <div class="row">
-            <div class="col">
-                <h5>@item.Product.Name</h5>
-                <p class="text-secondary">QT. 1</p>
-                <h5>&#8377; @item.Product.Price <span class="text-primary">via (Card)</span></h5>
-                <h5 class="text-warning">Tracking Status on: @DateTime.Now.ToShortDateString()</h5>
-                <h4 class="text-info">Status Processing..</h4>
-            </div>
-            <div class="col view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
-                <img class="img-fluid w-100"
-                     src="@item.Product.Image_Name" alt="Sample">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <h4>Rate this Product</h4>
-                @for (int i = 1; i <= 5; i++)
-                {
-                    <a asp-action="AddRating" style="text-decoration:none;color:grey"  asp-controller="Checkout" asp-route-pid="@item.ProductId"  asp-route-rating="@i"><span class="fa fa-star checked" style="font-size:20px;"></span></a>
-                }
-            </div>
-           
-        </div>
-    </div>
-       <hr>
+        <hr>
     }
 
 </div> 
