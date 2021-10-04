@@ -1,6 +1,7 @@
 ﻿using EcommercePortalMVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,8 +16,11 @@ namespace EcommercePortalMVC.Controllers
     [AllowAnonymous]
     public class UserController : Controller
     {
+        private readonly ILogger<UserController> _logger;
+        static readonly log4net.ILog _log4net = log4net.LogManager.GetLogger(typeof(UserController));
         public IActionResult Login()
         {
+            _log4net.Info("login Successful");
             return View();
         }
 
@@ -24,6 +28,7 @@ namespace EcommercePortalMVC.Controllers
 
         public IActionResult Logout()
         {
+            _log4net.Info("logger initiated");
             string url = String.Format("https://localhost:44380/User/Logout");
             using (var client = new HttpClient())
             {
@@ -35,9 +40,11 @@ namespace EcommercePortalMVC.Controllers
                 {
                     var result1 = result.Content.ReadAsStringAsync().Result;
                     Response.Cookies.Delete("token");
+                    _log4net.Info("Token Deleted");
                     return RedirectToAction("Login", "User");
                 }
             }
+            _log4net.Info("User login Successfully");
             return RedirectToAction("Login", "User");
 
         }
@@ -45,8 +52,8 @@ namespace EcommercePortalMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(User user)
         {
-
-           if(user.Email!=null && user.Password!=null)
+            _log4net.Info("logger initiated");
+            if (user.Email!=null && user.Password!=null)
             {
                 using (var client = new HttpClient())
                 {
@@ -66,7 +73,8 @@ namespace EcommercePortalMVC.Controllers
                     string result = await response.Content.ReadAsStringAsync();
                     if (response.IsSuccessStatusCode)
                     {
-                            Response.Cookies.Append("token", result, new Microsoft.AspNetCore.Http.CookieOptions
+                        _log4net.Info("Token Appended Successfully");
+                        Response.Cookies.Append("token", result, new Microsoft.AspNetCore.Http.CookieOptions
                             {
                                 HttpOnly = true,
 
@@ -79,12 +87,15 @@ namespace EcommercePortalMVC.Controllers
                         TempData["error"] = result;
                         if (response.ReasonPhrase.Equals("Not Found"))
                         {
+                            
                             ModelState.AddModelError("Email", result);
+                            _log4net.Error("Email is incorrect");
                             return View(user);
                         }
                         else
                         {
                             ModelState.AddModelError("Password", result);
+                            _log4net.Error("Password is incorrect");
                             return View(user);
                         }
                         
@@ -97,21 +108,25 @@ namespace EcommercePortalMVC.Controllers
             }
             else
             {
+                _log4net.Info("Email and Password are correct");
                 return View(user);
             }
         }
 
         public IActionResult Signup()
         {
+            _log4net.Info("Signup initiated");
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Signup(User user)
         {
-            
-            if(!ModelState.IsValid)
+
+            _log4net.Info("logger initiated");
+            if (!ModelState.IsValid)
             {
+
                 return View(user);
             }
             else
@@ -134,6 +149,7 @@ namespace EcommercePortalMVC.Controllers
                     string result = await response.Content.ReadAsStringAsync();
                     if (response.IsSuccessStatusCode)
                     {
+                        _log4net.Info("Login after Signedup");
                         return RedirectToAction("Login", "User");
                     }
                     else
@@ -141,8 +157,10 @@ namespace EcommercePortalMVC.Controllers
                         if (response.ReasonPhrase.Equals("Not Found"))
                         {
                             ModelState.AddModelError("Email", "email already exits please login");
+                            _log4net.Error("email already exits please login");
                             return View(user);
                         }
+                        _log4net.Info("Displaying User Account after Succesful login");
                         return View(user);
                     }
                     //It would be better to make sure this request actually made it through

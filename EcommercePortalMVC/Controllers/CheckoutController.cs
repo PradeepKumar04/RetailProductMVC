@@ -1,6 +1,7 @@
 ﻿using EcommercePortalMVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,21 +16,26 @@ namespace EcommercePortalMVC.Controllers
     [Authorize]
     public class CheckoutController : Controller
     {
+        private readonly ILogger<CheckoutController> _logger;
+        static readonly log4net.ILog _log4net = log4net.LogManager.GetLogger(typeof(CheckoutController));
         public static List<Order> Orders = new List<Order>();
 
         public IActionResult Order()
         {
+            _log4net.Info("View Orders");
             return View("OrderItem",Orders);
         }
 
         public IActionResult OrderItem()
         {
+            _log4net.Info("Redirected to Orders");
             return RedirectToAction("Order");
 
         }
 
         public async Task<IActionResult> AddRating(int rating, int pid)
         {
+            _log4net.Info("logger initiated");
             var token = Request.Cookies["token"];
             var handler = new JwtSecurityTokenHandler();
             var jwtSecurityToken = handler.ReadJwtToken(token);
@@ -54,10 +60,12 @@ namespace EcommercePortalMVC.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
+                    _log4net.Info("Successfully returned Products after Adding rating");
                     return RedirectToAction("GetProducts", "Products");
                 }
                 else
                 {
+                    _log4net.Info("Redirect to Orders");
                     return RedirectToAction("Order");
                 }
             }
@@ -67,6 +75,7 @@ namespace EcommercePortalMVC.Controllers
         [Route("Checkout/PaymentAddress/{productId}")]
         public IActionResult PaymentAddress(int productId)
         {
+            _log4net.Info("logger initiated");
             var token = Request.Cookies["token"];
             var handler = new JwtSecurityTokenHandler();
             var jwtSecurityToken = handler.ReadJwtToken(token);
@@ -81,11 +90,13 @@ namespace EcommercePortalMVC.Controllers
                 Vendor = new VendorStock().GetVendorByProductId(productId)
             };
             Orders.Add(order);
+            _log4net.Info("Payment Successful. Order initiated");
             return View();
         }
 
             public IActionResult PaymentAddress()
         {
+            _log4net.Info("logger initiated");
             var token = Request.Cookies["token"];
             var handler = new JwtSecurityTokenHandler();
             var jwtSecurityToken = handler.ReadJwtToken(token);
@@ -105,6 +116,7 @@ namespace EcommercePortalMVC.Controllers
                 order.UserId = id;
                 Orders.Add(order);
             }
+            _log4net.Info("Displaying View");
             return View();
         }
         

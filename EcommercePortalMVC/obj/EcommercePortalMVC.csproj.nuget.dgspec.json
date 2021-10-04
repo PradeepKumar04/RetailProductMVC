@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dilip\\Project\\RetailProductMVC\\EcommercePortalMVC\\EcommercePortalMVC.csproj": {}
+    "H:\\cognizant\\Retail\\RetailProductMVC\\EcommercePortalMVC\\EcommercePortalMVC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dilip\\Project\\RetailProductMVC\\EcommercePortalMVC\\EcommercePortalMVC.csproj": {
+    "H:\\cognizant\\Retail\\RetailProductMVC\\EcommercePortalMVC\\EcommercePortalMVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dilip\\Project\\RetailProductMVC\\EcommercePortalMVC\\EcommercePortalMVC.csproj",
+        "projectUniqueName": "H:\\cognizant\\Retail\\RetailProductMVC\\EcommercePortalMVC\\EcommercePortalMVC.csproj",
         "projectName": "EcommercePortalMVC",
-        "projectPath": "C:\\Users\\dilip\\Project\\RetailProductMVC\\EcommercePortalMVC\\EcommercePortalMVC.csproj",
-        "packagesPath": "C:\\Users\\dilip\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dilip\\Project\\RetailProductMVC\\EcommercePortalMVC\\obj\\",
+        "projectPath": "H:\\cognizant\\Retail\\RetailProductMVC\\EcommercePortalMVC\\EcommercePortalMVC.csproj",
+        "packagesPath": "C:\\Users\\karthik\\.nuget\\packages\\",
+        "outputPath": "H:\\cognizant\\Retail\\RetailProductMVC\\EcommercePortalMVC\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\dilip\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\karthik\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://www.nuget.org/api/v2": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
@@ -60,6 +56,10 @@
               "target": "Package",
               "version": "[3.1.19, )"
             },
+            "Microsoft.Extensions.Logging.Log4Net.AspNetCore": {
+              "target": "Package",
+              "version": "[5.0.4, )"
+            },
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",
               "version": "[1.11.1, )"
@@ -71,6 +71,10 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.1, )"
+            },
+            "log4net": {
+              "target": "Package",
+              "version": "[2.0.12, )"
             }
           },
           "imports": [
@@ -91,7 +95,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
